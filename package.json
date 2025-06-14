@@ -9,5 +9,13 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aryanchauhan1234/CodeTracker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aryanchauhan1234/CodeTracker/issues"
+  },
+  "homepage": "https://github.com/aryanchauhan1234/CodeTracker#readme"
 }
