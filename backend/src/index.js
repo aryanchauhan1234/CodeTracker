@@ -14,16 +14,15 @@ import userRoutes from "./routes/cf.route.js";
 dotenv.config();
 
 // Constants
-const PORT = process.env.PORT || 5000;
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const PORT = process.env.PORT;
+const __dirname = path.resolve();
 
 // Create express app
 const app = express();
 const server = http.createServer(app); // <== Initialize HTTP server
 
 // Middleware
-app.use(express.json({ limit: "10mb" }));
+app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
@@ -48,4 +47,3 @@ server.listen(PORT, () => {
   console.log("server is running on PORT:" + PORT);
   connectDB();
 });
-
