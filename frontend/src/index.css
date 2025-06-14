@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.color-empty {
+  fill: #ebedf0;
+}
+.color-scale-1 {
+  fill: #bbf7d0;
+}
+.color-scale-2 {
+  fill: #86efac;
+}
+.color-scale-3 {
+  fill: #4ade80;
+}
+.color-scale-4 {
+  fill: #16a34a;
+}
