@@ -10,6 +10,10 @@ import { connectDB } from "./lib/db.js";
 import authRoutes from "./routes/auth.route.js";
 import userRoutes from "./routes/cf.route.js";
 
+// Create express app
+const app = express();
+const server = http.createServer(app); // <== Initialize HTTP server
+
 // Load env variables
 dotenv.config();
 
@@ -17,9 +21,6 @@ dotenv.config();
 const PORT = process.env.PORT;
 const __dirname = path.resolve();
 
-// Create express app
-const app = express();
-const server = http.createServer(app); // <== Initialize HTTP server
 
 // Middleware
 app.use(express.json());
