@@ -46,29 +46,35 @@ export default function CFVerdictDistribution() {
   }, [user?.cfHandle]);
 
   return (
-    <div className="max-w-5xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow border border-gray-200">
-      <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-        🧾 Verdict Distribution
-      </h2>
-      <ResponsiveContainer width="100%" height={350}>
-        <PieChart>
-          <Pie
-            data={verdictData}
-            dataKey="value"
-            nameKey="name"
-            cx="50%"
-            cy="50%"
-            outerRadius={120}
-            label
-          >
-            {verdictData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-          <Tooltip />
-          <Legend layout="horizontal" verticalAlign="bottom" />
-        </PieChart>
-      </ResponsiveContainer>
+    <div className="max-w-5xl mx-auto px-6 mt-10 mb-20">
+      <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-orange-800 mb-6">
+          🧾 Verdict Distribution
+        </h2>
+        <div className="bg-orange-50 rounded-xl p-4">
+          <ResponsiveContainer width="100%" height={350}>
+            <PieChart>
+              <Pie
+                data={verdictData}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                outerRadius={120}
+                label
+              >
+                {verdictData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip
+                contentStyle={{ backgroundColor: "#fff", borderColor: "#f97316", borderRadius: "0.5rem" }}
+              />
+              <Legend layout="horizontal" verticalAlign="bottom" iconType="circle" />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
     </div>
   );
 }

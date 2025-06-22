@@ -1,58 +1,80 @@
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
-import { LogOut, Code, Settings, User, BarChart3, Brain } from "lucide-react";
 
 const Navbar = () => {
   const { logout, authUser } = useAuthStore();
 
   return (
-    <header
-      className="fixed top-0 z-50 w-full border-b border-white/10 bg-white/20 backdrop-blur-md shadow-md"
-    >
-      <div className="container mx-auto px-4 h-16">
-        <div className="flex items-center justify-between h-full">
-          <div className="flex items-center gap-8">
-            <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-all">
-              <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
-                <Code className="w-5 h-5 text-primary" />
+    <div className="fixed top-0 z-50 w-full bg-white/20 backdrop-blur-md shadow-md">
+      <div className="w-full px-4 py-3 relative">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-all">
+            <img className="w-7" src="/logo.png" alt="Logo" />
+            <h1 className="text-md font-bold flex items-center">
+              <span className="text-black">Code</span>
+              <span className="text-orange-500">Tracker</span>
+            </h1>
+          </Link>
+
+          {/* Navigation */}
+          <div className="flex items-center gap-6 text-sm font-bold">
+            <Link to="/" className="px-3 py-1 hover:bg-white/20 rounded transition text-black">
+              Leaderboard
+            </Link>
+
+            <Link to="/events" className="px-3 py-1 hover:bg-white/20 rounded transition text-black">
+              Event Tracker
+            </Link>
+
+            {/* ✅ Profile Tracker Dropdown with Increased Hover Area */}
+            <div className="relative group">
+              <div className="px-3 py-1 hover:bg-white/20 rounded transition text-black cursor-pointer">
+                Profile Tracker
               </div>
-              <h1 className="text-lg font-bold text-black drop-shadow">CodeTracker</h1>
-            </Link>
-          </div>
 
-          <div className="flex items-center gap-2">
-            <Link to="/codeforces" className="btn btn-sm gap-2 transition-colors bg-white/10 hover:bg-white/20 backdrop-blur rounded">
-              <BarChart3 className="w-5 h-5 text-primary" />
-              <span className="hidden sm:inline text-blue-600">Codeforces</span>
-            </Link>
+              {/* Enlarged invisible hover zone (buffer) */}
+              <div className="absolute top-full left-0 w-full h-4 group-hover:block hidden"></div>
 
-            <Link to="/Freindcomparison" className="btn btn-sm gap-2 transition-colors bg-white/10 hover:bg-white/20 backdrop-blur rounded">
-              <Brain className="w-5 h-5 text-red-400" />
-              <span className="hidden sm:inline text-red-400">Friends</span>
-            </Link>
+              {/* Actual dropdown */}
+              <div className="absolute top-full left-0 mt-1 w-48 bg-white shadow-lg rounded-lg hidden group-hover:flex flex-col z-50">
+                <Link
+                  to="/CodeForces"
+                  className="px-4 py-2 text-sm text-black hover:bg-gray-100 rounded-t"
+                >
+                  Codeforces
+                </Link>
+                <Link
+                  to="/portfolio"
+                  className="px-4 py-2 text-sm text-black hover:bg-gray-100"
+                >
+                  Coding <span className="text-orange-500"> Portfolio</span>
+                </Link>
+                {/* <Link
+                  to="/atcoder"
+                  className="px-4 py-2 text-sm text-black hover:bg-gray-100 rounded-b"
+                >
+                  AtCoder
+                </Link> */}
+              </div>
+            </div>
 
-            <Link to="/settings" className="btn btn-sm gap-2 transition-colors bg-white/10 hover:bg-white/20 backdrop-blur rounded">
-              <Settings className="w-4 h-4" />
-              <span className="hidden sm:inline">Settings</span>
+            <Link to="/Freindcomparison" className="px-3 py-1 hover:bg-white/20 rounded transition text-black">
+              Friends
             </Link>
 
             {authUser && (
-              <>
-                <Link to="/profile" className="btn btn-sm gap-2 transition-colors bg-white/10 hover:bg-white/20 backdrop-blur rounded">
-                  <User className="size-5" />
-                  <span className="hidden sm:inline">Profile</span>
-                </Link>
-
-                <button onClick={logout} className="btn btn-sm gap-2 transition-colors bg-white/10 hover:bg-white/20 backdrop-blur rounded">
-                  <LogOut className="size-5" />
-                  <span className="hidden sm:inline">Logout</span>
-                </button>
-              </>
+              <button
+                onClick={logout}
+                className="px-3 py-1 hover:bg-white/20 rounded transition text-black"
+              >
+                Logout
+              </button>
             )}
           </div>
         </div>
       </div>
-    </header>
+    </div>
   );
 };
 

@@ -61,4 +61,17 @@ export const useAuthStore = create((set, get) => ({
       toast.error(error.response.data.message);
     }
   },
+   // ✅ Update only cfHandle in authUser
+  updateCFHandle: (cfHandle) => {
+    set((state) => ({
+      authUser: {
+        ...state.authUser,
+        cfHandle,
+      },
+    }));
+  },
+  updateLeetHandle: (leetHandle) =>
+  set((state) => ({
+    authUser: { ...state.authUser, leetHandle },
+  })),
 }));

@@ -20,33 +20,31 @@ const FriendInput = ({ comparisonRef }) => {
     setFriends(friends.filter((f) => f !== friend));
   };
 
-const handleSubmit = async () => {
-  if (friends.length === 0) {
-    toast.error("Add at least one friend");
-    return;
-  }
+  const handleSubmit = async () => {
+    if (friends.length === 0) {
+      toast.error("Add at least one friend");
+      return;
+    }
 
-  const success = await addFriendsToDB(friends);
-  if (success) {
-    toast.success("Friends saved!");
-    setFriends([]);
+    const success = await addFriendsToDB(friends);
+    if (success) {
+      toast.success("Friends saved!");
+      setFriends([]);
 
-    // ✅ Set scroll flag in localStorage
-    localStorage.setItem("scrollToComparison", "true");
+      localStorage.setItem("scrollToComparison", "true");
+      setTimeout(() => {
+        window.location.reload();
+      }, 300);
+    } else {
+      toast.error("Error saving friends");
+    }
+  };
 
-    // ✅ Reload the page
-    setTimeout(() => {
-      window.location.reload();
-    }, 300);
-  } else {
-    toast.error("Error saving friends");
-  }
-};
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-sky-100 to-blue-200 flex items-center justify-center px-4 py-10">
-      <div className="w-full max-w-2xl p-8 rounded-3xl shadow-2xl bg-white/30 border border-white/20 backdrop-blur-2xl">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          Add Codeforces Friends
+    <div className="min-h-screen flex items-center justify-center px-4 py-10">
+      <div className="w-full max-w-2xl p-8 rounded-3xl shadow-lg bg-white border border-orange-200">
+        <h2 className="text-3xl font-extrabold text-orange-800 mb-6 text-center">
+          👥 Add Codeforces Friends
         </h2>
 
         <div className="flex gap-3 mb-4">
@@ -56,11 +54,11 @@ const handleSubmit = async () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleAddFriend()}
-            className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/80"
+            className="flex-1 border border-orange-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400 bg-orange-50 placeholder:text-orange-500"
           />
           <button
             onClick={handleAddFriend}
-            className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-all"
+            className="bg-orange-400 text-white px-5 py-2 rounded-xl hover:bg-orange-600 transition-all"
           >
             Add
           </button>
@@ -71,11 +69,11 @@ const handleSubmit = async () => {
             {friends.map((f) => (
               <div
                 key={f}
-                className="bg-white/70 backdrop-blur-sm border border-gray-300 text-sm px-3 py-1 rounded-full flex items-center shadow-sm"
+                className="bg-orange-100 border border-orange-300 text-sm px-3 py-1 rounded-full flex items-center shadow-sm text-orange-800"
               >
                 {f}
                 <X
-                  className="ml-2 w-4 h-4 cursor-pointer text-gray-600 hover:text-red-500"
+                  className="ml-2 w-4 h-4 cursor-pointer hover:text-red-600 transition"
                   onClick={() => handleRemoveFriend(f)}
                 />
               </div>
@@ -85,7 +83,7 @@ const handleSubmit = async () => {
 
         <button
           onClick={handleSubmit}
-          className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-all"
+          className="w-full bg-orange-500 text-white py-2 rounded-xl hover:bg-orange-600 transition-all"
         >
           Save Friends
         </button>

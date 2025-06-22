@@ -9,6 +9,10 @@ import http from "http";
 import { connectDB } from "./lib/db.js";
 import authRoutes from "./routes/auth.route.js";
 import userRoutes from "./routes/cf.route.js";
+<<<<<<< HEAD
+=======
+import leetcodeRoutes from "./routes/leet.route.js";
+>>>>>>> 4345ce6 (update1)
 
 // Create express app
 const app = express();
@@ -35,6 +39,8 @@ app.use(
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/cfusers", userRoutes);
+app.use("/api/leetcode", leetcodeRoutes);
+
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));

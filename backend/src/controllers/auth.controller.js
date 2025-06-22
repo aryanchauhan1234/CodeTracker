@@ -68,12 +68,14 @@ export const login = async (req, res) => {
       fullName: user.fullName,
       email: user.email,
       profilePic: user.profilePic,
+      cfHandle: user.cfHandle || null, // Include cfHandle if it exists
     });
   } catch (error) {
     console.log("Error in login controller", error.message);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
 
 export const logout = (req, res) => {
   try {

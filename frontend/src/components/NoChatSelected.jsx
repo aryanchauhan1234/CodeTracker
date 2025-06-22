@@ -1,103 +1,60 @@
 import { Code, MousePointerClick, Brain, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-
+// import ProfilePage from "../pages/ProfilePage";
 const NoChatSelected = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full flex-1 flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-100 to-blue-200 animate-[gradientMove_8s_ease-in-out_infinite]">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="max-w-md text-center space-y-6 p-8 
-        bg-white/30 border border-white/30 shadow-2xl 
-        rounded-3xl backdrop-blur-2xl transition-all duration-500"
-      >
-        {/* Animated Icon */}
-        <motion.div
-          animate={{ rotate: [0, 10, -10, 0] }}
-          transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-          className="w-16 h-16 mx-auto rounded-2xl bg-blue-100/60 flex items-center justify-center shadow-lg"
-        >
-          <Code className="w-8 h-8 text-blue-600 animate-pulse" />
-        </motion.div>
+    <div className=" w-screen  scroll-smooth">
+      <div className="w-[70%] mx-auto ">
+        <div>
+          <h1 className="text-black font-extrabold text-6xl">Track , analyze & share</h1>
+          <h2 className="text-gray-500 text-3xl mt-6 font-semibold text-center">Code<span className="text-orange-500">Tracker</span>  helps you navigate and track your
+            coding journey to successQuestion Tracker
+          </h2>
+        </div>
+        <div className="flex gap-4 justify-center mt-5">
+          <button onClick={() => navigate("/")} className="bg-white text-black-500 border border-black-800 font-semibold py-1 px-10 rounded-lg shadow-sm  transition duration-200">
+            Question Tracker
+          </button>
+          <button onClick={() => navigate("/codeforces")} className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-1 px-10 rounded-lg shadow-md transition duration-200">
+            Profile Tracker
+          </button>
 
-        {/* Heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.7 }}
-          className="text-4xl font-extrabold text-blue-700 tracking-tight"
-        >
-          Welcome, Coding Warrior! ⚔️
-        </motion.h2>
+        </div>
+      </div>
+      {/* <div className="flex"> */}
+      <div className="flex mt-[15%] justify-between">
+        <img className=" w-[20%] h-[20%]" src="/photo1.png" alt="" />
+        <div className=" w-[40%]  mt-5">
+          <h className=" font-extrabold text-3xl text-center">track your Code<span className="text-orange-500">Forces</span> journey With Me</h>
+        </div>
+        <div className="border  border-gray-900 rounded-2xl p-2 mx-10">
+          <img src="/1.png" alt="" />
+        </div>
+      </div>
+      <div className=" mx-auto w-[70%] mt-20">
+        <h1 className="text-black font-extrabold text-5xl">Your Favourite Coding Platform</h1>
+        <h2  className="text-gray-500 text-3xl mt-6 font-semibold text-center" >Streamlined in Codolio to simplify your
+          coding journey</h2>
+      </div>
 
-        {/* Description */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="text-gray-700 text-base leading-relaxed"
-        >
-          Ready to explore your{" "}
-          <span
-            onClick={() => navigate("/codeforces")}
-            className="cursor-pointer text-blue-600 hover:text-red-700 font-semibold transition-all duration-300"
-          >
-            coding journey
-          </span>
-          ?<br />
-          Select a section from the sidebar to dive in.
-        </motion.p>
+      <div className=" flex mx-auto  mt-[15%] gap-[5%]">
+        <div className="border  w-[60%] border-gray-900 rounded-2xl p-2">
+          <img src="/3.png" alt="" />
+        </div>
+        <div className=" w-[30%]  mt-5 flex">
+        <img className=" w-[80%] h-[80%]" src="/photo3.png" alt="" />
+        <h1 className=" font-extrabold text-3xl ">Your pro<span className="text-orange-500">blems</span> distributions and much more.. </h1>
+      </div>
 
-        {/* Tips */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-          className="text-sm text-blue-600 mt-4 space-y-2"
-        >
-          {[
-            {
-              icon: <MousePointerClick className="w-4 h-4" />,
-              text: 'Click "Insights" to view your personalized stats.',
-            },
-            {
-              icon: <Brain className="w-4 h-4" />,
-              text: "Track your weak topics and consistency.",
-            },
-            {
-              icon: <Sparkles className="w-4 h-4" />,
-              text: "Compare yourself with friends and grow faster!",
-            },
-          ].map((item, idx) => (
-            <motion.div
-              key={idx}
-              whileHover={{ scale: 1.07 }}
-              className="flex items-center justify-center gap-2 hover:text-blue-800 transition-all duration-300"
-            >
-              {item.icon}
-              <span>{item.text}</span>
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.div>
-
-      {/* Smooth Background Animation */}
-      <style>
-        {`
-          @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-          }
-          .animate-[gradientMove_8s_ease-in-out_infinite] {
-            background-size: 200% 200%;
-          }
-        `}
-      </style>
+      </div>
+<div className="  w-[50%] mt-20">
+        <h1 className="text-black font-extrabold text-5xl">Simplify Your Prep</h1>
+        <h2  className="text-gray-500 text-3xl mt-6 font-semibold" >by tracking your contests on</h2>
+    </div>
+        <img onClick={() => navigate("/events")} className="w-[80%] cursor-pointer my-10" src="/photo4.png" alt="" />
     </div>
   );
 };

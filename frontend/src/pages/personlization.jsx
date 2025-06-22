@@ -9,7 +9,7 @@ export default function CFPersonalization() {
   const [dailyActivity, setDailyActivity] = useState([]);
   const [ratingHistory, setRatingHistory] = useState([]);
   const [suggestion, setSuggestion] = useState("");
-  const [todaySolved, setTodaySolved] = useState(0); // ✅ added
+  const [todaySolved, setTodaySolved] = useState(0);
 
   useEffect(() => {
     const fetchInsights = async () => {
@@ -62,9 +62,9 @@ export default function CFPersonalization() {
       );
       setDailyActivity(sortedDays);
 
-      const today = dayjs().format("YYYY-MM-DD"); // ✅ today's date
+      const today = dayjs().format("YYYY-MM-DD");
       const todayCount = dailyMap.get(today) || 0;
-      setTodaySolved(todayCount); // ✅ store in state
+      setTodaySolved(todayCount);
 
       const last10 = ratingTrend.slice(-10).map((r) => r.rating);
       const growth = last10.length >= 2 && last10[last10.length - 1] > last10[0];
@@ -88,63 +88,64 @@ export default function CFPersonalization() {
   }, [user?.cfHandle]);
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-white to-blue-50  py-[7%] px-4 ">
-      <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl p-8 border border-gray-200">
-        <h2 className="text-3xl font-bold text-blue-600 mb-8 text-center">
+    <div className="min-h-screen w-full  py-[7%] px-4">
+      <div className="max-w-5xl mx-auto bg-white/30 border border-orange-200 backdrop-blur-2xl rounded-3xl shadow-xl p-8">
+        <h2 className="text-3xl font-bold text-orange-600 mb-8 text-center">
           🧠 Personalized Codeforces Insights
         </h2>
 
-        {/* ✅ Today’s Progress Section */}
         <section className="mb-10">
-          <h3 className="text-xl font-semibold text-gray-700 mb-2">🗓️ Today’s Progress</h3>
-          <p className="text-sm text-gray-600">
+          <h3 className="text-xl font-semibold text-orange-700 mb-2">🗓️ Today’s Progress</h3>
+          <p className="text-sm text-gray-700">
             You've solved <strong>{todaySolved}</strong> problem{todaySolved !== 1 ? "s" : ""} today.
           </p>
         </section>
 
         <section className="mb-10">
-          <h3 className="text-xl font-semibold text-gray-700 mb-2">🔍 Weak Topics</h3>
+          <h3 className="text-xl font-semibold text-orange-700 mb-2">🔍 Weak Topics</h3>
           {topicStats.weakTopics?.length > 0 ? (
             <div className="flex flex-wrap gap-2">
               {topicStats.weakTopics.map((tag) => (
                 <span
                   key={tag}
-                  className="bg-red-100 text-red-700 px-4 py-1 rounded-full text-sm"
+                  className="bg-orange-100 text-orange-700 px-4 py-1 rounded-full text-sm shadow-sm"
                 >
                   {tag}
                 </span>
               ))}
             </div>
           ) : (
-            <p className="text-gray-500">No weak topics detected. You're strong across the board! 💪</p>
+            <p className="text-gray-600">No weak topics detected. You're strong across the board! 💪</p>
           )}
         </section>
 
         <section className="mb-10">
-          <h3 className="text-xl font-semibold text-gray-700 mb-2">📅 Recent Daily Activity</h3>
-          <ul className="text-gray-600 text-sm space-y-1">
+          <h3 className="text-xl font-semibold text-orange-700 mb-2">📅 Recent Daily Activity</h3>
+          <ul className="text-gray-700 text-sm space-y-1">
             {dailyActivity.slice(-5).map(([date, count]) => (
-              <li key={date} className="flex justify-between bg-gray-100 rounded-lg px-5">
-                <span className="font-bold">{date}</span>
-                <span className="text-green-400 font-bold">{count} problem(s)</span>
+              <li
+                key={date}
+                className="flex justify-between bg-white/50 backdrop-blur-sm rounded-xl px-4 py-1 border border-orange-100"
+              >
+                <span className="font-medium">{date}</span>
+                <span className="text-green-600 font-semibold">{count} problem(s)</span>
               </li>
             ))}
           </ul>
         </section>
 
         <section className="mb-10">
-          <h3 className="text-xl font-semibold text-gray-700 mb-2">📈 Growth Insight</h3>
-          <p className="text-gray-600 text-sm">
+          <h3 className="text-xl font-semibold text-orange-700 mb-2">📈 Growth Insight</h3>
+          <p className="text-gray-700 text-sm">
             Based on your last few submissions, you're{" "}
             {ratingHistory.length > 5 &&
-            ratingHistory[ratingHistory.length - 1].rating >
-              ratingHistory[0].rating
+            ratingHistory[ratingHistory.length - 1].rating > ratingHistory[0].rating
               ? "on a growth path. Keep it up! 🚀"
               : "not growing much. Try pushing your limits. ⚠️"}
           </p>
         </section>
 
-        <section className="bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-4 rounded-xl">
+        <section className="bg-orange-100/60 backdrop-blur-md border border-orange-300 text-orange-800 p-5 rounded-xl shadow-sm">
           <h4 className="font-semibold text-lg mb-1">💡 Suggestions for You</h4>
           <p className="text-sm">
             {suggestion || "You're doing great! Just keep the momentum going. 🔥"}

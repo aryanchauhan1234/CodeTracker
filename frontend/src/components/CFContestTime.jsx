@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { useCfStorestemp } from "../store/useCfStorestemp";
+import {useAuthStore} from "../store/useAuthStore.js"
 import axios from "axios";
 
 export default function CFContestSolveTime() {
-  const { user } = useCfStorestemp();
+  const {authUser} = useAuthStore();
+  const user = authUser;
   const [contestNumber, setContestNumber] = useState("");
   const [contestId, setContestId] = useState(null);
   const [timeTakenMap, setTimeTakenMap] = useState({});
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); // ✅ NEW
+  const [loading, setLoading] = useState(false);
 
   const fetchContestIdByNumber = async (number) => {
     try {
@@ -69,7 +71,7 @@ export default function CFContestSolveTime() {
   };
 
   const handleSubmit = async () => {
-    setLoading(true); // ✅ Start loading
+    setLoading(true);
     setError("");
     setTimeTakenMap({});
     const id = await fetchContestIdByNumber(contestNumber);
@@ -79,67 +81,87 @@ export default function CFContestSolveTime() {
     } else {
       setError("Invalid contest number.");
     }
-    setLoading(false); // ✅ End loading
+    setLoading(false);
   };
 
   return (
-    <div className="max-w-5xl mx-auto mt-4 p-6 bg-white rounded-2xl shadow border border-gray-200">
-      <h2 className="text-3xl font-semibold mb-4 text-gray-800">
-        🕒 Time Taken Per Problem in Contest
-      </h2>
+    <div className="max-w-5xl mx-auto px-6  mb-10">
+      <div className=" border rounded-3xl p-10 space-y-10">
 
-      <div className="flex flex-col sm:flex-row gap-4 items-center mb-6">
-        <input
-          type="number"
-          min="1"
-          placeholder="Enter Contest Number (e.g., 1 = latest)"
-          value={contestNumber}
-          onChange={(e) => setContestNumber(e.target.value)}
-          className="flex-1 border border-gray-300 px-4 py-2 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
-          disabled={loading}
-        />
-        <button
-          onClick={handleSubmit}
-          disabled={loading}
-          className={`px-5 py-2 rounded-md text-white transition ${
-            loading
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700"
-          }`}
-        >
-          {loading ? "⏳ Fetching..." : "Fetch Times"}
-        </button>
-      </div>
+        {/* Header */}
+        <div>
+          <h2 className="text-3xl font-extrabold text-orange-800 tracking-tight">
+            🕒 Time Taken Per Problem in Contest
+          </h2>
+          <p className="text-gray-600  mt-1 text-base">
+            Enter contest number to see how quickly each problem was solved.
+          </p>
+        </div>
 
-      {error && <p className="text-red-500 mb-4">{error}</p>}
+        {/* Input & Button */}
+        <div className="flex flex-col sm:flex-row gap-4 items-center">
+          <input
+            type="number"
+            min="1"
+            placeholder="Enter Contest Number (e.g., 1 = latest)"
+            value={contestNumber}
+            onChange={(e) => setContestNumber(e.target.value)}
+            className="flex-1 border border-orange-300 px-4 py-2 rounded-md shadow-sm focus:ring-2 focus:ring-orange-400 focus:outline-none text-sm"
+            disabled={loading}
+          />
+          <button
+            onClick={handleSubmit}
+            disabled={loading}
+            className={`px-5 py-2 rounded-full font-semibold text-white text-sm transition shadow-md ${
+              loading
+                ? "bg-orange-300 cursor-not-allowed"
+                : "bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600"
+            }`}
+          >
+            {loading ? "⏳ Fetching..." : "Fetch Times"}
+          </button>
+        </div>
 
-      {Object.keys(timeTakenMap).length > 0 ? (
-        <ul className="space-y-2">
-          {Object.entries(timeTakenMap)
-            .sort((a, b) => a[0].localeCompare(b[0]))
-            .map(([problem, { minutes, withinContest }]) => (
-              <li
-                key={problem}
-                className={`flex justify-between border px-4 py-2 rounded-md ${
-                  withinContest
-                    ? "bg-green-100 hover:bg-green-200"
-                    : "bg-red-100 hover:bg-red-200"
-                }`}
-              >
-                <span className="font-medium text-gray-700">Problem {problem}</span>
-                <span className="text-gray-700">
-                  {minutes} min{" "}
-                  <span className="ml-2 text-sm font-medium italic">
-                    ({withinContest ? "Within Contest" : "After Contest"})
+        {/* Error */}
+        {error && (
+          <div className="text-red-600 font-medium text-sm">{error}</div>
+        )}
+
+        {/* Results */}
+        {Object.keys(timeTakenMap).length > 0 ? (
+          <ul className="space-y-3">
+            {Object.entries(timeTakenMap)
+              .sort((a, b) => a[0].localeCompare(b[0]))
+              .map(([problem, { minutes, withinContest }]) => (
+                <li
+                  key={problem}
+                  className={`flex justify-between items-center px-4 py-3 rounded-2xl transition shadow-sm ${
+                    withinContest
+                      ? "bg-orange-100 hover:bg-orange-200"
+                      : "bg-red-100 hover:bg-red-200"
+                  }`}
+                >
+                  <span className="font-semibold text-orange-800 text-sm">
+                    Problem {problem}
                   </span>
-                </span>
-              </li>
-            ))}
-        </ul>
-      ) : (
-        !error &&
-        !loading && <p className="text-gray-500">Enter a contest number to view solve times.</p>
-      )}
+                  <span className="text-gray-700 text-sm">
+                    {minutes} min{" "}
+                    <span className="ml-2 italic font-medium text-xs">
+                      ({withinContest ? "Within Contest" : "After Contest"})
+                    </span>
+                  </span>
+                </li>
+              ))}
+          </ul>
+        ) : (
+          !error &&
+          !loading && (
+            <p className="text-gray-500 italic text-sm">
+              Enter a contest number to view solve times.
+            </p>
+          )
+        )}
+      </div>
     </div>
   );
 }

@@ -37,15 +37,15 @@ const FriendComparison = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-sky-100 to-blue-200 flex items-start justify-center px-4 py-[10%]">
-      <div className="w-full max-w-6xl bg-white/30 border border-white/20 backdrop-blur-2xl shadow-2xl rounded-3xl p-8">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
-          Codeforces Friend Comparison
+    <div className="min-h-screen  flex items-start justify-center px-4 py-[8%]">
+      <div className="w-full max-w-6xl bg-white border border-orange-200 rounded-3xl p-8 shadow-xl">
+        <h2 className="text-3xl font-bold text-center text-orange-700 mb-6">
+          👥 Codeforces Friend Comparison
         </h2>
 
         {loading ? (
           <div className="flex justify-center items-center py-10">
-            <ClipLoader size={50} color="#3B82F6" />
+            <ClipLoader size={50} color="#F97316" />
           </div>
         ) : comparison.length === 0 ? (
           <p className="text-gray-600 text-center text-lg">
@@ -54,10 +54,10 @@ const FriendComparison = () => {
         ) : (
           <>
             {/* TABLE */}
-            <div className="overflow-x-auto rounded-xl border border-blue-100 mb-8">
-              <table className="w-full text-sm text-gray-700 bg-white/60 backdrop-blur-sm shadow-sm rounded-xl overflow-hidden">
+            <div className="overflow-x-auto rounded-xl border border-orange-100 mb-8">
+              <table className="w-full text-sm text-gray-700 bg-orange-50 shadow rounded-xl overflow-hidden">
                 <thead>
-                  <tr className="bg-blue-100 text-gray-800 text-left">
+                  <tr className="bg-orange-100 text-orange-800 text-left">
                     <th className="p-3 font-semibold">Handle</th>
                     <th className="p-3 font-semibold">Rank</th>
                     <th className="p-3 font-semibold">Rating</th>
@@ -69,32 +69,43 @@ const FriendComparison = () => {
                   </tr>
                 </thead>
                 <tbody>
-  {comparison.map((f, idx) => (
-    <tr
-      key={f.handle}
-      className={`border-t ${idx % 2 === 0 ? "bg-white/70" : "bg-white/40"} backdrop-blur-sm`}
-    >
-      <td className="p-3 font-medium text-blue-700">{f.handle}</td>
-      <td className="p-3">{f.rank || "N/A"}</td>
-      <td className="p-3 text-blue-600">{f.rating ?? "N/A"}</td>
-      <td className="p-3 text-green-600">{f.maxRating ?? "N/A"}</td>
-      <td className="p-3 text-yellow-600">{f.problemsSolved ?? "N/A"}</td>
-      <td className="p-3 text-orange-600">{f.contestsAttended ?? "N/A"}</td>
-      <td className="p-3 text-indigo-600">
-        {f.avgSolvedPerContest ?? "-"}
-      </td>
-      <td className="p-3 text-pink-600">{f.contribution ?? "N/A"}</td>
-    </tr>
-  ))}
-</tbody>
-
+                  {comparison.map((f, idx) => (
+                    <tr
+                      key={f.handle}
+                      className={`border-t ${
+                        idx % 2 === 0 ? "bg-white" : "bg-orange-50"
+                      }`}
+                    >
+                      <td className="p-3 font-medium text-orange-700">
+                        {f.handle}
+                      </td>
+                      <td className="p-3">{f.rank || "N/A"}</td>
+                      <td className="p-3 text-blue-600">{f.rating ?? "N/A"}</td>
+                      <td className="p-3 text-green-600">
+                        {f.maxRating ?? "N/A"}
+                      </td>
+                      <td className="p-3 text-yellow-600">
+                        {f.problemsSolved ?? "N/A"}
+                      </td>
+                      <td className="p-3 text-orange-600">
+                        {f.contestsAttended ?? "N/A"}
+                      </td>
+                      <td className="p-3 text-indigo-600">
+                        {f.avgSolvedPerContest ?? "-"}
+                      </td>
+                      <td className="p-3 text-pink-600">
+                        {f.contribution ?? "N/A"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
               </table>
             </div>
 
-            {/* FULL COMPARISON BAR GRAPH */}
+            {/* BAR CHART */}
             <div className="w-full h-[500px]">
-              <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">
-                Full Metric Comparison
+              <h3 className="text-xl font-bold text-orange-700 mb-4 text-center">
+                📊 Full Metric Comparison
               </h3>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart

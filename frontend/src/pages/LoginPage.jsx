@@ -1,121 +1,149 @@
 import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
-import AuthImagePattern from "../components/AuthImagePattern";
 import { Link } from "react-router-dom";
 import { Eye, EyeOff, Loader2, Lock, Mail, SmilePlus } from "lucide-react";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const { login, isLoggingIn } = useAuthStore();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    if (!formData.email || !formData.password) {
+      toast.error("Please fill in all fields");
+      return;
+    }
     login(formData);
   };
 
   return (
-
-    
-    <div className="h-screen ">
-      {/* Left Side - Form */}
-      <div className="flex flex-col justify-center items-center p-6 sm:p-12">
-        <div className="w-full max-w-md space-y-8">
-          {/* Logo */}
-          <div className="text-center mb-8">
-            <div className="flex flex-col items-center gap-2 group">
-              <div
-                className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20
-              transition-colors"
-              >
-                <SmilePlus className="w-6 h-6 text-primary" />
-              </div>
-              <h1 className="text-2xl font-bold mt-2">Welcome Back</h1>
-              <p className="text-base-content/60">Sign in to your account</p>
-            </div>
-          </div>
-
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium">Email</span>
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-base-content/40" />
-                </div>
-                <input
-                  type="email"
-                  className={`input input-bordered w-full pl-10`}
-                  placeholder="you@example.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                />
-              </div>
-            </div>
-
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium">Password</span>
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-base-content/40" />
-                </div>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  className={`input input-bordered w-full pl-10`}
-                  placeholder="••••••••"
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-base-content/40" />
-                  ) : (
-                    <Eye className="h-5 w-5 text-base-content/40" />
-                  )}
-                </button>
-              </div>
-            </div>
-
-            <button type="submit" className="btn btn-primary w-full" disabled={isLoggingIn}>
-              {isLoggingIn ? (
-                <>
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                  Loading...
-                </>
-              ) : (
-                "Sign in"
-              )}
-            </button>
-          </form>
-
-          <div className="text-center">
-            <p className="text-base-content/60">
-              Don&apos;t have an account?{" "}
-              <Link to="/signup" className="link link-primary">
-                Create account
-              </Link>
-            </p>
-          </div>
+    <div className=" min-h-screen flex flex-col md:flex-row">
+      {/* LEFT - FORM SECTION */}
+<div className="w-full md:w-1/2 bg-white flex items-center justify-center px-6 md:px-12 py-12">
+  <div className="w-full max-w-md">
+    <div className="text-center">
+      <div className="flex justify-center mb-4">
+        <div className="size-12 rounded-xl bg-orange-100 flex items-center justify-center">
+          <SmilePlus className="size-6 text-orange-500" />
         </div>
       </div>
+      <h1 className="text-3xl font-bold text-orange-600">Welcome Back</h1>
+      <p className="text-gray-500 text-sm mt-2">Sign in to your account</p>
+    </div>
 
-      {/* Right Side - Image/Pattern */}
-      {/* <AuthImagePattern
-        title={"Welcome back!"}
-        subtitle={"Sign in to continue your conversations and catch up with your messages."}
-      /> */}
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Email */}
+      <div className="relative">
+        <label className="text-sm font-medium text-gray-700 mb-1 block">Email</label>
+        <input
+          type="email"
+          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+          placeholder="you@example.com"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+        />
+        <Mail className="absolute left-3 top-10 transform -translate-y-1/2 text-gray-400 size-5" />
+      </div>
+
+      {/* Password */}
+      <div className="relative">
+        <label className="text-sm font-medium text-gray-700 mb-1 block">Password</label>
+        <input
+          type={showPassword ? "text" : "password"}
+          className="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+          placeholder="••••••••"
+          value={formData.password}
+          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+        />
+        <Lock className="absolute left-3 top-10 transform -translate-y-1/2 text-gray-400 size-5" />
+        <button
+          type="button"
+          className="absolute right-3 top-10 transform -translate-y-1/2 text-gray-400"
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
+        </button>
+      </div>
+
+      {/* Sign In Button */}
+      <button
+        type="submit"
+        className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg font-semibold shadow-md transition"
+        disabled={isLoggingIn}
+      >
+        {isLoggingIn ? (
+          <div className="flex items-center justify-center gap-2">
+            <Loader2 className="animate-spin size-5" />
+            Logging in...
+          </div>
+        ) : (
+          "Sign In"
+        )}
+      </button>
+{/* Divider */}
+<div className="flex items-center my-4">
+  <hr className="flex-grow border-t border-gray-300" />
+  <span className="mx-3 text-gray-500 text-sm">or continue with</span>
+  <hr className="flex-grow border-t border-gray-300" />
+</div>
+
+      {/* Google Sign In */}
+      <button
+        type="button"
+        className="w-[80%] mx-auto flex items-center justify-center gap-2 border border-orange-400 text-orange-500 hover:bg-orange-50 py-2 rounded-lg font-semibold transition"
+        onClick={() => toast("Google login not yet implemented")}
+      >
+        <img className="w-6" src="/google.png" alt="" />
+        Continue with Google
+      </button>
+      <p className=" w-[80%] text-xs text-gray-400 text-center mt-4 px-4 mx-auto">
+  By signing in or creating an account, you are agreeing to our{" "}
+  <a href="/terms" className="text-orange-500 hover:underline">Terms & Conditions</a> and our{" "}
+  <a href="/privacy" className="text-orange-500 hover:underline">Privacy Policy</a>.
+</p>
+
+    </form>
+
+    <div className="text-center mt-6">
+      <p className="text-gray-500 text-sm">
+        Don&apos;t have an account?{" "}
+        <Link to="/signup" className="text-orange-500 font-semibold hover:underline">
+          Create account
+        </Link>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+      {/* RIGHT - THEME DESIGN */}
+      <div className=" mt-[4%] hidden md:flex w-1/2 bg-orange-500 text-white flex-col justify-center px-10 py-16 space-y-10 relative overflow-hidden">
+        <h2 className="text-3xl font-bold">Welcome to <span className="text-black"> Code</span>Tracker</h2>
+
+        <div className="space-y-6">
+          <Feature icon="📊" title="All in One Coding Profile" desc="Showcase your complete coding portfolio, track all stats, and share your progress effortlessly in one place." />
+          <Feature icon="📄" title="Follow Popular Sheets" desc="Organize questions and follow popular coding Sheets in one place for seamless revision." />
+          <Feature icon="🏆" title="Contest Tracker" desc="Stay on top of contests by tracking schedules and setting reminders with a single click." />
+        </div>
+
+        {/* Optional blobs */}
+        <div className="absolute right-10 top-10 w-40 h-40 bg-orange-400/20 rounded-full blur-2xl"></div>
+        <div className="absolute left-[-20px] bottom-10 w-32 h-32 bg-orange-300/10 rounded-full blur-xl"></div>
+      </div>
     </div>
   );
 };
+
+const Feature = ({ icon, title, desc }) => (
+  <div className="flex items-start space-x-4">
+    <div className="bg-white text-orange-500 p-3 rounded-lg shadow-sm text-xl">{icon}</div>
+    <div>
+      <h3 className="text-lg font-bold">{title}</h3>
+      <p className="text-sm text-orange-100">{desc}</p>
+    </div>
+  </div>
+);
+
 export default LoginPage;

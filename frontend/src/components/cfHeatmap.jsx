@@ -12,7 +12,7 @@ export default function CFHeatmap() {
 
   useEffect(() => {
     const load = async () => {
-      const submissions = await fetchCFSubmissions(user?.cfHandle, 3000);
+      const submissions = await fetchCFSubmissions(3000);
       const grouped = groupSubmissionsByDate(submissions);
 
       const start = dayjs(`${selectedYear}-01-01`);
@@ -30,14 +30,14 @@ export default function CFHeatmap() {
       setHeatmapData(data);
     };
 
-    if (user?.cfHandle) load();
+     load();
   }, [user?.cfHandle, selectedYear]);
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-10 bg-white border border-gray-200 rounded-2xl shadow-sm mt-20 mb-20">
+    <div className="max-w-5xl mx-auto px-6 py-10 mt-10 bg-white border border-gray-200 rounded-2xl shadow">
       <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-        <h2 className="text-4xl font-semibold text-gray-800">
-          📅 Codeforces Submission Activity
+        <h2 className="text-4xl font-semibold text-orange-800">
+          📅 Submission Activity
         </h2>
         <select
           value={selectedYear}
@@ -69,15 +69,14 @@ export default function CFHeatmap() {
           }
           showWeekdayLabels={true}
         />
-
       </div>
 
       <div className="mt-6 flex gap-4 text-sm text-gray-600 justify-center">
         <LegendBlock color="bg-gray-200" label="0" />
-        <LegendBlock color="bg-blue-100" label="1–2" />
-        <LegendBlock color="bg-blue-300" label="3–5" />
-        <LegendBlock color="bg-blue-500" label="6–10" />
-        <LegendBlock color="bg-blue-700" label="10+" />
+        <LegendBlock color="bg-orange-100" label="1–2" />
+        <LegendBlock color="bg-orange-300" label="3–5" />
+        <LegendBlock color="bg-orange-500" label="6–10" />
+        <LegendBlock color="bg-orange-700" label="10+" />
       </div>
 
       <style>
@@ -96,10 +95,10 @@ export default function CFHeatmap() {
             transition: all 0.2s ease-in-out;
           }
           .color-empty { fill: #e5e7eb; }
-          .color-scale-1 { fill: #dbeafe; }
-          .color-scale-2 { fill: #93c5fd; }
-          .color-scale-3 { fill: #3b82f6; }
-          .color-scale-4 { fill: #1e40af; }
+          .color-scale-1 { fill: #ffedd5; } /* orange-100 */
+          .color-scale-2 { fill: #fdba74; } /* orange-300 */
+          .color-scale-3 { fill: #fb923c; } /* orange-500 */
+          .color-scale-4 { fill: #c2410c; } /* orange-700 */
         `}
       </style>
     </div>

@@ -10,7 +10,7 @@ export default function FloatingPersonalizeButton() {
   return (
     <button
       onClick={() => navigate("/personalization")}
-      className=" min-w-screen fixed bottom-6 right-6 z-50 p-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg transition-all duration-200"
+      className=" min-w-screen fixed bottom-6 right-6 z-50 p-4 bg-red-600 hover:bg-red-700 text-white rounded-full shadow-lg transition-all duration-200"
       title="Personalized Insights"
     >
       <Wand2 size={24} />

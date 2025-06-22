@@ -9,9 +9,8 @@ export default function CFStreakTracker() {
 
   useEffect(() => {
     const load = async () => {
-      const submissions = await fetchCFSubmissions(user?.cfHandle, 5000);
+      const submissions = await fetchCFSubmissions(5000);
 
-      // Group submissions by date
       const datesSet = new Set();
       submissions.forEach((sub) => {
         if (sub.verdict === "OK") {
@@ -35,7 +34,6 @@ export default function CFStreakTracker() {
         maxStreakFound = Math.max(maxStreakFound, currStreak);
       }
 
-      // Check for current streak
       let today = dayjs().format("YYYY-MM-DD");
       let yesterday = dayjs().subtract(1, "day").format("YYYY-MM-DD");
       let count = 0;
@@ -49,22 +47,30 @@ export default function CFStreakTracker() {
       setMaxStreak(maxStreakFound);
     };
 
-    if (user?.cfHandle) load();
+    load();
   }, [user?.cfHandle]);
 
   return (
-    <div className="max-w-4xl mx-auto mt-4 p-6 bg-white rounded-xl shadow border border-gray-200">
-      <h2 className="text-4xl font-semibold mb-3 text-gray-800">
-        🔥 Streak Tracker
-      </h2>
-      <div className="flex justify-between items-center text-gray-700 text-lg">
-        <div>
-          <p className="text-gray-500 text-sm">Current Streak</p>
-          <p className="text-blue-600 font-bold text-2xl">{currentStreak} 🔁</p>
-        </div>
-        <div>
-          <p className="text-gray-500 text-sm">Longest Streak</p>
-          <p className="text-green-600 font-bold text-2xl">{maxStreak} 🏆</p>
+    <div className="max-w-5xl mx-auto px-6 mb-10">
+      <div className=" border rounded-3xl p-10 space-y-6">
+        {/* <h2 className="text-2xl md:text-3xl font-extrabold text-orange-800 tracking-tight">
+          🔥 Streak Tracker
+        </h2> */}
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition border">
+            <p className="text-sm text-gray-500 mb-1">Current Streak</p>
+            <p className="text-3xl font-bold text-black-600">
+              {currentStreak} 🔁
+            </p>
+          </div>
+
+          <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition border">
+            <p className="text-sm text-gray-500 mb-1">Longest Streak</p>
+            <p className="text-3xl font-bold text-orange-600">
+              {maxStreak} 🏆
+            </p>
+          </div>
         </div>
       </div>
     </div>

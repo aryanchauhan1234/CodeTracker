@@ -8,7 +8,7 @@ export default function CFAverageSolveTime() {
 
   useEffect(() => {
     const calculateAvg = async () => {
-      const submissions = await fetchCFSubmissions(user?.cfHandle, 3000);
+      const submissions = await fetchCFSubmissions(3000);
       const accepted = submissions.filter(sub => sub.verdict === "OK");
 
       const uniqueSolved = new Map();
