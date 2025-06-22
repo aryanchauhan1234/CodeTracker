@@ -20,13 +20,15 @@ const CodeForces = () => {
   const {authUser} = useAuthStore();
   return (
     <div className="min-h-screen bg-gray-50 pt-[4%]  flex">
-    {!authUser.cfHandle && <CFHandleInput />}
   {/* Main Content */}
+   {isLoading && (
+  <div className="fixed inset-0 z-50 flex justify-center items-center bg-white/70">
+    <Loader className="w-10 h-10 text-orange-500 animate-spin" />
+  </div>
+)}
     {authUser.cfHandle && <Sidebar/>}
   <main className=" flex-1  max-w-7xl mx-auto">
-    {isLoading && <div className="flex justify-center items-center h-screen">
-          <Loader className="w-10 h-10 text-orange-500 animate-spin" />
-        </div>}
+    {!authUser.cfHandle && <CFHandleInput />}
 
     {authUser.cfHandle && (
       <>
