@@ -9,10 +9,7 @@ import http from "http";
 import { connectDB } from "./lib/db.js";
 import authRoutes from "./routes/auth.route.js";
 import userRoutes from "./routes/cf.route.js";
-<<<<<<< HEAD
-=======
 import leetcodeRoutes from "./routes/leet.route.js";
->>>>>>> 4345ce6 (update1)
 
 // Create express app
 const app = express();

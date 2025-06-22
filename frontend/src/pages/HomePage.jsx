@@ -60,7 +60,7 @@ const HomePage = () => {
         <img onClick={() => navigate("/events")} className="w-[80%] cursor-pointer my-10" src="/photo4.png" alt="" />
 <div className="  w-[80%] mt-20">
         <h1 className="text-black font-extrabold text-5xl">Your <span className="text-orange-500">All-in-One</span>  Coding Portfolio</h1>
-        <h2 onClick={() => navigate("/portfolio")}  className="text-blue-500 font-sm mt-6 font-semibold cursor-pointer" >Get your Portfolio-> </h2>
+        <h2 onClick={() => navigate("/portfolio")}  className="text-blue-500 font-sm mt-6 font-semibold cursor-pointer" >Get your Portfolio </h2>
     </div>
         <img  className="w-[80%] cursor-pointer my-5" src="/portfolio.png" alt="" />
     </div>
