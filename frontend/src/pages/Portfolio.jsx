@@ -104,7 +104,7 @@ const PortfolioPage = () => {
   return (
     <div className="mt-[5%] flex min-h-screen">
       {/* 🧭 Sidebar */}
-      <Sidebar />
+      {authUser.leetHandle && authUser.cfHandle && <Sidebar />}
 
       {/* 📄 Main Content */}
       <div className="flex-1 p-6 space-y-6 bg-gray-50 overflow-y-auto">
@@ -112,9 +112,10 @@ const PortfolioPage = () => {
           <span className="text-orange-500">Coding</span> Portfolio
         </h1>
 
-        {!authUser.leetHandle && <HandleInput />}
-        {!authUser.cfHandle && <HandleInput />}
-
+        {!authUser.leetHandle && !authUser.cfHandle && <HandleInput />}
+        {/* {!authUser.cfHandle && <HandleInput />} */}
+        {authUser.leetHandle && authUser.cfHandle && (
+      <>
         {/* 🔝 TOP CARDS */}
         <div className="flex flex-wrap justify-between gap-4">
           <Card label="Total Questions Solved" value={totalSolved} big />
@@ -132,7 +133,9 @@ const PortfolioPage = () => {
           <Card label="LeetCode Rank" value={leetRank} />
           <Card label="Codeforces Rank" value={cfRank} />
         </div>
-      </div>
+      </>
+    )}
+    </div>
     </div>
   );
 };
