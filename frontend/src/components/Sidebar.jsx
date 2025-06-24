@@ -1,11 +1,12 @@
 import { Home, BarChart, User, Settings, Users, MapPin, GraduationCap , Lock} from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation , useNavigate} from "react-router-dom";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { useCfStorestemp } from "../store/useCfStorestemp";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const { fetchCFData } = useCfStorestemp();
   const [cfUser, setCfUser] = useState(null);
   const { authUser } = useAuthStore();
@@ -60,7 +61,7 @@ const Sidebar = () => {
       <div className="flex flex-col space-y-4">
     
         <button className="mt-4 w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition">View Leaderboard</button>
-<button className="mt-2 w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition flex items-center justify-center gap-2">
+<button onClick={() => navigate("/card")} className="mt-2 w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition flex items-center justify-center gap-2">
   <span>Unlock Card</span>
   <Lock className="w-4 h-4" />
 </button>

@@ -57,12 +57,17 @@ const HomePage = () => {
         <h1 className="text-black font-extrabold text-5xl">Simplify Your Prep</h1>
         <h2  className="text-gray-500 text-3xl mt-6 font-semibold" >by tracking your contests on</h2>
     </div>
-        <img onClick={() => navigate("/events")} className="w-[80%] cursor-pointer my-10" src="/photo4.png" alt="" />
-<div className="  w-[80%] mt-20">
+        <img onClick={() => navigate("/events")} className="w-[100%] cursor-pointer my-10" src="/photo4.png" alt="" />
+<div className="  w-[100%] mt-20">
         <h1 className="text-black font-extrabold text-5xl">Your <span className="text-orange-500">All-in-One</span>  Coding Portfolio</h1>
-        <h2 onClick={() => navigate("/portfolio")}  className="text-blue-500 font-sm mt-6 font-semibold cursor-pointer" >Get your Portfolio </h2>
+        <h2 onClick={() => navigate("/portfolio")}  className="text-blue-500 font-sm mt-6 font-semibold cursor-pointer" >Get your Portfolio {'->'} </h2>
     </div>
-        <img  className="w-[80%] cursor-pointer my-5" src="/portfolio.png" alt="" />
+        <img  className="w-[100%] cursor-pointer my-5" src="/portfolio.png" alt="" />
+<div className="  w-[100%] mt-20">
+        <h1 className=" text-center text-black font-extrabold text-5xl"><span className="text-orange-500">UNLOCK</span> your  Coding CARD</h1>
+        <h2 onClick={() => navigate("/card")}  className="text-center text-blue-500 font-sm mt-6 font-semibold cursor-pointer" >Get your Card {'->'} </h2>
+    </div>
+        <img  className=" mx-auto w-[40%] h-[50%] cursor-pointer my-5 border border-orange-500 rounded-2xl" src="/card.png" alt="" />
     </div>
   );
 };

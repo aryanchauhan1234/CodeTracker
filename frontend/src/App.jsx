@@ -10,6 +10,7 @@ import Personalization from "./pages/personlization";
 import AddFreind from "./components/AddFreind"
 import FriendComparison from "./pages/FreindComparison";
 import Portfolio from "./pages/Portfolio"; 
+import Card from "./pages/card";
 import { useGlobalStore } from "./store/useGlobalStore";
 import GlobalLoader from "./components/GlobalLoader";
 import Footer from "./components/Footer";
@@ -62,6 +63,7 @@ const App = () => {
           <Route path="/addfreind" element={authUser ? <AddFreind /> : <Navigate to="/login" />} />
           <Route path="/portfolio" element={authUser ? <Portfolio /> : <Navigate to="/login" />} />
           <Route path="/events" element={<Events /> } />
+          <Route path="/Card" element={<Card /> } />
         </Routes>
       </main>
 

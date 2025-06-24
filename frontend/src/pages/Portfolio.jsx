@@ -36,10 +36,10 @@ const PortfolioPage = () => {
   const [cfContests, setCfContests] = useState(0);
   const [cfSolved, setCfSolved] = useState(0);
   const [cfRating, setCfRating] = useState(null);
-  const [loading, setLoading] = useState(true); // 👈 Loader state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    window.scrollTo(0, 0); // 👈 Scroll to top when page loads
+    window.scrollTo(0, 0);
 
     const fetchAllData = async () => {
       try {
@@ -66,7 +66,7 @@ const PortfolioPage = () => {
           if (cfData?.rating) setCfRating(cfData.rating);
         }
       } finally {
-        setLoading(false); // ✅ Stop loader
+        setLoading(false);
       }
     };
 
@@ -82,7 +82,6 @@ const PortfolioPage = () => {
 
   const leetRank = getLeetCodeRankName(leetRating);
   const cfRank = getCodeforcesRankName(cfRating);
-  const topicStats = leetStats?.topicWiseSolved || {};
 
   const Card = ({ label, value, big }) => (
     <div className={`border-orange-300 rounded-2xl shadow-md p-6 bg-white border ${big ? "w-full sm:w-[48%] h-40" : "w-full sm:w-[30%] h-32"} mb-4`}>
@@ -95,47 +94,43 @@ const PortfolioPage = () => {
 
   if (loading) {
     return (
-       <div className="flex justify-center items-center h-screen">
-          <Loader className="w-10 h-10 text-orange-500 animate-spin" />
-        </div>
+      <div className="flex justify-center items-center h-screen">
+        <Loader className="w-10 h-10 text-orange-500 animate-spin" />
+      </div>
     );
   }
 
   return (
     <div className="mt-[5%] flex min-h-screen">
-      {/* 🧭 Sidebar */}
       {authUser.leetHandle && authUser.cfHandle && <Sidebar />}
 
-      {/* 📄 Main Content */}
       <div className="flex-1 p-6 space-y-6 bg-gray-50 overflow-y-auto">
         <h1 className="text-3xl font-bold mb-6">
           <span className="text-orange-500">Coding</span> Portfolio
         </h1>
 
         {!authUser.leetHandle && !authUser.cfHandle && <HandleInput />}
-        {/* {!authUser.cfHandle && <HandleInput />} */}
-        {authUser.leetHandle && authUser.cfHandle && (
-      <>
-        {/* 🔝 TOP CARDS */}
-        <div className="flex flex-wrap justify-between gap-4">
-          <Card label="Total Questions Solved" value={totalSolved} big />
-          <Card label="Total Contests" value={totalContests} big />
-          <Card label="LeetCode Rating" value={leetRating || "N/A"} big />
-          <Card label="Codeforces Rating" value={cfRating || "N/A"} big />
-        </div>
 
-        {/* 🔽 Secondary Stats */}
-        <div className="flex flex-wrap justify-between gap-4">
-          <Card label="LeetCode Solved" value={leetSolved} />
-          <Card label="Codeforces Solved" value={cfSolved} />
-          <Card label="LeetCode Contests" value={leetContests} />
-          <Card label="Codeforces Contests" value={cfContests} />
-          <Card label="LeetCode Rank" value={leetRank} />
-          <Card label="Codeforces Rank" value={cfRank} />
-        </div>
-      </>
-    )}
-    </div>
+        {authUser.leetHandle && authUser.cfHandle && (
+          <>
+            <div className="flex flex-wrap justify-between gap-4">
+              <Card label="Total Questions Solved" value={totalSolved} big />
+              <Card label="Total Contests" value={totalContests} big />
+              <Card label="LeetCode Rating" value={leetRating || "N/A"} big />
+              <Card label="Codeforces Rating" value={cfRating || "N/A"} big />
+            </div>
+
+            <div className="flex flex-wrap justify-between gap-4">
+              <Card label="LeetCode Solved" value={leetSolved} />
+              <Card label="Codeforces Solved" value={cfSolved} />
+              <Card label="LeetCode Contests" value={leetContests} />
+              <Card label="Codeforces Contests" value={cfContests} />
+              <Card label="LeetCode Rank" value={leetRank} />
+              <Card label="Codeforces Rank" value={cfRank} />
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };

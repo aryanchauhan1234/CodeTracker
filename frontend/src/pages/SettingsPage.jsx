@@ -1,55 +1,75 @@
-// import { THEMES } from "../constants";
-// import { useThemeStore } from "../store/useThemeStore";
-// import { Send } from "lucide-react";
+// import { Card, CardContent } from "@/components/ui/card";
+import { FaCodeforces, FaLink } from "react-icons/fa6";
+import { SiLeetcode } from "react-icons/si";
 
-// const PREVIEW_MESSAGES = [
-//   { id: 1, content: "Hey! How's it going?", isSent: false },
-//   { id: 2, content: "I'm doing great! Just working on some new features.", isSent: true },
-// ];
+const UserCard = ({ user }) => {
+  const {
+    name,
+    handle,
+    profilePic,
+    codeforces,
+    leetcode,
+    tags,
+  } = user;
 
-// const SettingsPage = () => {
-//   const { theme, setTheme } = useThemeStore();
+  return (
+    <Card className="max-w-sm rounded-2xl shadow-xl p-4 bg-white">
+      <div className="flex flex-col items-center text-center">
+        <img
+          src={profilePic}
+          alt="Profile"
+          className="w-24 h-24 rounded-full border-4 border-black object-cover"
+        />
+        <h2 className="text-xl font-bold mt-2">{name}</h2>
+        <p className="text-sm text-gray-500">@{handle}</p>
 
-//   return (
-//     <div className="h-screen pt-20 px-4 mx-auto max-w-5xl">
-//       <div className="space-y-8">
-//         {/* Theme Heading */}
-//         <div>
-//           <h2 className="text-2xl font-semibold">🎨 Theme Customization</h2>
-//           <p className="text-sm text-base-content/70 mt-1">
-//             Select a theme to personalize your chat experience.
-//           </p>
-//         </div>
+        <div className="grid grid-cols-2 gap-4 mt-4 w-full">
+          <div className="border p-3 rounded-xl text-center bg-gray-50">
+            <h4 className="text-md font-semibold text-[#1f8acb] flex items-center justify-center gap-1">
+              <FaCodeforces /> Codeforces
+            </h4>
+            <p className="text-sm">Rating: <strong>{codeforces.rating}</strong></p>
+            <p className="text-sm">Rank: <strong>{codeforces.rank}</strong></p>
+            <a
+              href={codeforces.profile}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-blue-500 hover:underline flex items-center justify-center gap-1 mt-1"
+            >
+              <FaLink /> View Profile
+            </a>
+          </div>
 
-//         {/* Theme Selector Grid */}
-//         <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-7 gap-3">
-//           {THEMES.map((t) => (
-//             <button
-//               key={t}
-//               className={`group rounded-xl p-2 transition-colors border shadow-sm ${
-//                 theme === t
-//                   ? "bg-base-200 border-blue-400 ring-2 ring-blue-300"
-//                   : "hover:bg-base-200/70 border-transparent"
-//               }`}
-//               onClick={() => setTheme(t)}
-//             >
-//               <div className="relative h-8 w-full rounded-md overflow-hidden" data-theme={t}>
-//                 <div className="absolute inset-0 grid grid-cols-4 gap-px p-1">
-//                   <div className="rounded bg-primary"></div>
-//                   <div className="rounded bg-secondary"></div>
-//                   <div className="rounded bg-accent"></div>
-//                   <div className="rounded bg-neutral"></div>
-//                 </div>
-//               </div>
-//               <span className="text-[11px] font-medium truncate w-full text-center mt-1 text-base-content/80">
-//                 {t.charAt(0).toUpperCase() + t.slice(1)}
-//               </span>
-//             </button>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
+          <div className="border p-3 rounded-xl text-center bg-gray-50">
+            <h4 className="text-md font-semibold text-[#f89f1b] flex items-center justify-center gap-1">
+              <SiLeetcode /> LeetCode
+            </h4>
+            <p className="text-sm">Rating: <strong>{leetcode.rating}</strong></p>
+            <p className="text-sm">Global Rank: <strong>{leetcode.rank}</strong></p>
+            <a
+              href={leetcode.profile}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-blue-500 hover:underline flex items-center justify-center gap-1 mt-1"
+            >
+              <FaLink /> View Profile
+            </a>
+          </div>
+        </div>
 
-// export default SettingsPage;
+        <div className="mt-4 flex flex-wrap justify-center gap-2">
+          {tags.map((tag, i) => (
+            <span
+              key={i}
+              className="px-3 py-1 bg-gray-200 text-sm rounded-full text-gray-700"
+            >
+              #{tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </Card>
+  );
+};
+
+export default UserCard;
