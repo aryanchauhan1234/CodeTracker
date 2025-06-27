@@ -7,7 +7,7 @@ const Footer = () => {
         
         {/* Brand Info */}
         <div>
-          <h1 className="text-2xl font-bold mb-4">Code <span className="text-orange-500">Tracker</span></h1>
+          <h1 className="text-2xl font-bold mb-4">Cod<span className="text-orange-500">esis</span></h1>
           <p className="text-gray-400 text-sm">
             Track your coding journey across platforms like Codeforces
           </p>
@@ -37,7 +37,7 @@ const Footer = () => {
       </div>
 
       <div className="mt-10 border-t border-gray-700 pt-6 text-center text-gray-500 text-sm">
-        © {new Date().getFullYear()} CodeTracker. All rights reserved.
+        © {new Date().getFullYear()} Codesis. All rights reserved.
       </div>
     </footer>
   );
