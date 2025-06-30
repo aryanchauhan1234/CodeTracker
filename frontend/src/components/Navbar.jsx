@@ -25,7 +25,7 @@ const Navbar = () => {
               <img className="w-8" src="/logo.png" alt="Logo" />
               <h1 className="text-lg font-bold flex items-center">
                 <span className="text-black">Cod</span>
-                <span className="text-orange-500">esis</span>
+                <span className="text-orange-500">efolio</span>
               </h1>
             </Link>
 

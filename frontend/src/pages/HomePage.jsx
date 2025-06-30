@@ -12,7 +12,7 @@ const HomePage = () => {
           Track, Analyze & Share
         </h1>
         <h2 className="text-gray-500 text-2xl sm:text-3xl font-semibold">
-          <span className="text-orange-500">Codesis</span> helps you navigate and track your coding journey to success
+          <span className="text-orange-500">Codefolio</span> helps you navigate and track your coding journey to success
         </h2>
         <div className="flex justify-center gap-4 mt-6 flex-wrap">
           <button
@@ -109,7 +109,7 @@ const HomePage = () => {
       {/* Card Unlock Section */}
       <div className="mt-20 text-center">
         <h1 className="text-black font-extrabold text-4xl sm:text-5xl">
-          <span className="text-orange-500">UNLOCK</span> your Coding CARD
+          <span className="text-orange-500">UNLOCK</span> your Codefolio CARD
         </h1>
         <h2
           onClick={() => navigate("/card")}
