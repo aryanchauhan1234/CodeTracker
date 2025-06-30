@@ -34,8 +34,8 @@ const Navbar = () => {
               <Link to="/" className="px-2.5 py-1 hover:bg-white/20 rounded transition text-black">
                 Leaderboard
               </Link>
-              <Link to="/events" className="px-2.5 py-1 hover:bg-white/20 rounded transition text-black">
-                Event Tracker
+              <Link to="/dsa-visualizer" className="px-2.5 py-1 hover:bg-white/20 rounded transition text-black">
+                Algorithms
               </Link>
 
               {/* Dropdown */}
@@ -50,6 +50,9 @@ const Navbar = () => {
                   </Link>
                   <Link to="/portfolio" className="px-4 py-2 text-base text-black hover:bg-gray-100">
                     Coding <span className="text-orange-500">Portfolio</span>
+                  </Link>
+                  <Link to="/events" className="px-4 py-2 text-base text-black hover:bg-gray-100">
+                    Event Tracker
                   </Link>
                 </div>
               </div>

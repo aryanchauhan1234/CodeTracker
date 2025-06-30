@@ -26,7 +26,7 @@ const user = authUser;
 
   return (
     <div className="max-w-5xl mx-auto px-6 mb-10">
-      <div className="bg-gradient-to-r from-orange-100/60 via-white/60 to-yellow-100/60 backdrop-blur-xl border border-orange-200 shadow-2xl rounded-3xl p-10 space-y-10">
+      <div className=" backdrop-blur-xl border border-orange-500 shadow-2xl rounded-3xl p-10 space-y-10">
         
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex items-center gap-6">
@@ -39,7 +39,7 @@ const user = authUser;
                 href={`https://codeforces.com/profile/${cfData.handle}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-block mt-3 px-5 py-2 text-sm md:text-base font-semibold text-white bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 rounded-full shadow-md transition"
+                className="inline-block mt-3 px-5 py-2 text-sm md:text-base font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full shadow-md transition"
               >
                 View Profile
               </a>

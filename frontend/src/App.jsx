@@ -15,6 +15,7 @@ import { useGlobalStore } from "./store/useGlobalStore";
 import GlobalLoader from "./components/GlobalLoader";
 import Footer from "./components/Footer";
 import Events from "./pages/events"
+import Dsavisualizer from "./pages/dsa-visualizer";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuthStore } from "./store/useAuthStore";
 // import { useThemeStore } from "./store/useThemeStore";
@@ -64,6 +65,7 @@ const App = () => {
           <Route path="/portfolio" element={authUser ? <Portfolio /> : <Navigate to="/login" />} />
           <Route path="/events" element={<Events /> } />
           <Route path="/Card" element={<Card /> } />
+          <Route path="/dsa-visualizer" element={<Dsavisualizer /> } />
         </Routes>
       </main>
 
